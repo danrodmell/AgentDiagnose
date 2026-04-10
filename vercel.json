@@ -1,0 +1,27 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "AgentDiagnoseSMB/DiagnoseAgent/ai-readiness-agent/public/index.html",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "AgentDiagnoseSMB/DiagnoseAgent/ai-readiness-agent/api/**.py",
+      "use": "@vercel/python"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/AgentDiagnoseSMB/DiagnoseAgent/ai-readiness-agent/api/$1.py",
+      "methods": ["POST", "GET"]
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/AgentDiagnoseSMB/DiagnoseAgent/ai-readiness-agent/public/index.html"
+    }
+  ],
+  "env": {
+    "PYTHON_VERSION": "3.11"
+  }
+}
